@@ -9,24 +9,27 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import guis.proyecto.FormularioIngresos;
 import guis.proyecto.FormularioProducto;
+import guis.proyecto.FormularioReporteProductos;
+import guis.proyecto.FormularioReporteSalas;
 import guis.proyecto.FormularioReserva;
 import guis.proyecto.FormularioSala;
+import guis.proyecto.FormularioSalida;
 import guis.proyecto.FormularioUsuarios;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 @SuppressWarnings("serial")
-public class MenuPrincipal extends JFrame implements ActionListener {
+public class MenuPrincipal extends JFrame implements ActionListener, AncestorListener {
 
 	private JLabel lblFondo;
 	private JMenuBar menuProyecto;
 	private JMenu mnReporte;
-	private JMenuItem mntmAtencionesPendientes;
-	private JMenuItem mntmAtencionesPagadas;
-	private JMenuItem mntmInternamientosPendientes;
-	private JMenuItem mntmInternamientosPagados;
 	private JPanel contentPane;
 	private JMenu mnMantenimiento_1;
 	private JMenuItem mntm_1;
@@ -37,6 +40,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	private JMenuItem mntmSalidas;
 	private JMenuItem mntm;
 	private JMenuItem mntmEmpleados;
+	private JMenuItem mntmConsumoPorSala;
+	private JMenuItem mntmConsultarStock;
 
 	/**
 	 * Launch the application.
@@ -96,29 +101,23 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		menuProyecto.add(mnAlmacen);
 
 		mntmEntradas = new JMenuItem("Entradas");
+		mntmEntradas.addActionListener(this);
 		mnAlmacen.add(mntmEntradas);
 
 		mntmSalidas = new JMenuItem("Salidas");
+		mntmSalidas.addActionListener(this);
 		mnAlmacen.add(mntmSalidas);
 
 		mnReporte = new JMenu("Reporte");
 		menuProyecto.add(mnReporte);
-
-		mntmAtencionesPendientes = new JMenuItem("Atenciones pendientes");
-		mntmAtencionesPendientes.addActionListener(this);
-		mnReporte.add(mntmAtencionesPendientes);
-
-		mntmAtencionesPagadas = new JMenuItem("Atenciones pagadas");
-		mntmAtencionesPagadas.addActionListener(this);
-		mnReporte.add(mntmAtencionesPagadas);
-
-		mntmInternamientosPendientes = new JMenuItem("Internamientos pendientes");
-		mntmInternamientosPendientes.addActionListener(this);
-		mnReporte.add(mntmInternamientosPendientes);
-
-		mntmInternamientosPagados = new JMenuItem("Internamientos pagados");
-		mntmInternamientosPagados.addActionListener(this);
-		mnReporte.add(mntmInternamientosPagados);
+		
+		mntmConsultarStock = new JMenuItem("Consultar Stock");
+		mntmConsultarStock.addActionListener(this);
+		mnReporte.add(mntmConsultarStock);
+		
+		mntmConsumoPorSala = new JMenuItem("Consumo por Sala");
+		mntmConsumoPorSala.addActionListener(this);
+		mnReporte.add(mntmConsumoPorSala);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -131,6 +130,18 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmConsumoPorSala) {
+			actionPerformedMntmConsumoPorSala(e);
+		}
+		if (e.getSource() == mntmConsultarStock) {
+			actionPerformedMntmConsultarStock(e);
+		}
+		if (e.getSource() == mntmSalidas) {
+			actionPerformedMntmSalidas(e);
+		}
+		if (e.getSource() == mntmEntradas) {
+			actionPerformedMntmEntradas(e);
+		}
 		if (e.getSource() == mntmEmpleados) {
 			actionPerformedMntmEmpleados(e);
 		}
@@ -166,4 +177,44 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		dip.setLocationRelativeTo(this);
 		dip.setVisible(true);
 	}
+	protected void actionPerformedMntmEntradas(ActionEvent e) {
+		FormularioIngresos dip = new FormularioIngresos();
+		dip.setLocationRelativeTo(this);
+		dip.setVisible(true);
+	}
+	protected void actionPerformedMntmSalidas(ActionEvent e) {
+		FormularioSalida dip = new FormularioSalida();
+		dip.setLocationRelativeTo(this);
+		dip.setVisible(true);
+	}
+	protected void actionPerformedMntmConsultarStock(ActionEvent e) {
+		FormularioReporteProductos dip = new FormularioReporteProductos();
+		dip.setLocationRelativeTo(this);
+		dip.setVisible(true);
+	}
+	protected void actionPerformedMntmConsumoPorSala(ActionEvent e) {
+		FormularioReporteSalas dip = new FormularioReporteSalas();
+		dip.setLocationRelativeTo(this);
+		dip.setVisible(true);
+	}
+	
+	@Override
+	public void ancestorAdded(AncestorEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ancestorRemoved(AncestorEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ancestorMoved(AncestorEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

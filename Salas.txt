@@ -1,4 +1,4 @@
 5001;SALA 1;20;false
 5002;SALA 2;30;false
-5003;SALA 3;25;true
+5003;SALA 3;25;false
 5004;SALA 4;40;false

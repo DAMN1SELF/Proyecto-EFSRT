@@ -6,8 +6,10 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import clases.proyecto.Reserva;
 
@@ -58,12 +60,14 @@ public class ArregloReservas{
             PrintWriter pw;
             String linea;
             Reserva x;
+            
+        
             pw = new PrintWriter(new FileWriter("Reservas.txt"));
             for (int i = 0; i < tamanio(); i++) {
                 x = obtener(i);
                 linea = 
                 x.getCodigoReserva() + ";" +
-                x.getFechaReserva()  + ";" +
+                format.format(x.getFechaReserva()) + ";" +
                 x.getCodigoSala() + ";" +
                 x.getFechaInicio() + ";" +
                 x.getFechaFin() + ";" +
@@ -84,7 +88,7 @@ public class ArregloReservas{
             String[] s;
             int codigoReserva,codigoSala,nroAsistentes, codigoUsuarioReserva;
             Date fechaReserva ;
-            String fechaInicio,  fechaFin;
+            String fechaInicio,fechaFin;
             String observacion;
             br = new BufferedReader(new FileReader("Reservas.txt"));
             while ((linea = br.readLine()) != null) {
@@ -101,6 +105,7 @@ public class ArregloReservas{
             }
             br.close();
         } catch (Exception e) {
+        	System.out.println(e.getMessage());
         }
     }
 

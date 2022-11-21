@@ -24,7 +24,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -52,6 +51,27 @@ public class FormularioReserva extends JDialog implements ActionListener, KeyLis
 	private JTable tblReserva;
 	private DefaultTableModel modelo;
 	private JLabel lblCategoria;
+	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+	ArregloReservas ap = new ArregloReservas();
+	ArregloSalas ap2 = new ArregloSalas();
+	private JComboBox<String> cboSala;
+	private JTextField txtUsuario;
+	private JButton btnBuscar;
+	private JDateChooser fechaRegistro;
+	private JLabel lblFechaReserva;
+	private JLabel lblHoraInicio;
+	private JLabel lblHoraFin;
+	private JComboBox<String> cboHoraIni;
+	private JComboBox<String> cboHoraFin;
+	private JComboBox<String> cboMinIni;
+	private JComboBox<String> cboMinFin;
+	private JComboBox<String> cboZHIni;
+	private JComboBox<String> cboZHFin;
+	private JTextField txtNroAsistentes;
+	private JLabel lblNombre_1;
+	private JTextField txtAforo;
+	private JLabel lblNombre_2;
+	private JTextArea txtObservacion;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -246,26 +266,7 @@ public class FormularioReserva extends JDialog implements ActionListener, KeyLis
 		
 
 	}
-	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-	ArregloReservas ap = new ArregloReservas();
-	private JComboBox<String> cboSala;
-	private JTextField txtUsuario;
-	private JButton btnBuscar;
-	private JDateChooser fechaRegistro;
-	private JLabel lblFechaReserva;
-	private JLabel lblHoraInicio;
-	private JLabel lblHoraFin;
-	private JComboBox<String> cboHoraIni;
-	private JComboBox<String> cboHoraFin;
-	private JComboBox<String> cboMinIni;
-	private JComboBox<String> cboMinFin;
-	private JComboBox<String> cboZHIni;
-	private JComboBox<String> cboZHFin;
-	private JTextField txtNroAsistentes;
-	private JLabel lblNombre_1;
-	private JTextField txtAforo;
-	private JLabel lblNombre_2;
-	private JTextArea txtObservacion;
+
 
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnBuscar) {
@@ -471,36 +472,41 @@ public class FormularioReserva extends JDialog implements ActionListener, KeyLis
 	}
 
 	void listar() {
-		
-		int posFila = 0;
-		if (modelo.getRowCount() > 0)
-			posFila = tblReserva.getSelectedRow();
-		if (modelo.getRowCount() == ap.tamanio() - 1)
-			posFila = ap.tamanio() - 1;
-		if (posFila == ap.tamanio())
-			posFila--;
-		modelo.setRowCount(0);
-		
-		ArregloSalas as= new ArregloSalas();
-		ArregloUsuarios au = new ArregloUsuarios();
-		Reserva p;
-		Sala s;
-		Usuario u;
-		for (int i = 0; i < ap.tamanio(); i++) {
-			p = ap.obtener(i);
-			s= as.buscar(p.getCodigoSala());
-			u=au.buscar(p.getCodigoUsuarioReserva());
-			Object[] fila = { 
-					p.getCodigoReserva(),
-					formatoFecha.format(p.getFechaReserva()),
-					p.getFechaInicio(),
-					p.getFechaFin(),
-					s.getCodigoSala() +"-"+ s.getNombreSala(),
-					u.getCodigoUsuario()+"-"+ u.getNombres()+" "+u.getApellidos()};
-			modelo.addRow(fila);
+		try {
+
+			int posFila = 0;
+			if (modelo.getRowCount() > 0)
+				posFila = tblReserva.getSelectedRow();
+			if (modelo.getRowCount() == ap.tamanio() - 1)
+				posFila = ap.tamanio() - 1;
+			if (posFila == ap.tamanio())
+				posFila--;
+			modelo.setRowCount(0);
+			
+			ArregloSalas as= new ArregloSalas();
+			ArregloUsuarios au = new ArregloUsuarios();
+			Reserva p;
+			Sala s;
+			Usuario u;
+			for (int i = 0; i < ap.tamanio(); i++) {
+				p = ap.obtener(i);
+				System.out.println(i);
+				s= as.buscar(p.getCodigoSala());
+				u=au.buscar(p.getCodigoUsuarioReserva());
+				Object[] fila = { 
+						p.getCodigoReserva(),
+						formatoFecha.format(p.getFechaReserva()),
+						p.getFechaInicio(),
+						p.getFechaFin(),
+						s.getCodigoSala() +"-"+ s.getNombreSala(),
+						u.getCodigoUsuario()+"-"+ u.getNombres()+" "+u.getApellidos()};
+				modelo.addRow(fila);
+			}
+			if (ap.tamanio() > 0)
+				tblReserva.getSelectionModel().setSelectionInterval(posFila, posFila);
+		} catch (Exception e) {
+			System.out.println( "listar "+e.getMessage());
 		}
-		if (ap.tamanio() > 0)
-			tblReserva.getSelectionModel().setSelectionInterval(posFila, posFila);
 		 
 	}
 

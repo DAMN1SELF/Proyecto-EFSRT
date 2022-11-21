@@ -1,17 +1,17 @@
 package guis.proyecto;
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import com.toedter.components.JLocaleChooser;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 public class Calendario extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JCalendar calendar;
 	private JDateChooser dateChooser;

@@ -29,7 +29,11 @@ import javax.swing.JComboBox;
 
 public class FormularioProducto extends JDialog implements ActionListener, KeyListener, MouseListener {
     
-    private JLabel lblImgProducto;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel lblImgProducto;
     private JLabel lblCodigoProducto;
     private JLabel lblCapacidad;
     private JLabel lblNombre;

@@ -21,6 +21,10 @@ import javax.swing.DefaultComboBoxModel;
 
 public class FormularioUsuarios extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -60,6 +64,7 @@ public class FormularioUsuarios extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public FormularioUsuarios() {
+		setTitle("Mantenimiento| Usuarios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 577, 300);
 		contentPane = new JPanel();

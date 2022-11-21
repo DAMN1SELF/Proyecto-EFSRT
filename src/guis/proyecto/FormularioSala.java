@@ -25,7 +25,11 @@ import javax.swing.JCheckBox;
 
 public class FormularioSala extends JDialog implements ActionListener, KeyListener, MouseListener {
 
-    private JLabel lblImgSala;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel lblImgSala;
     private JLabel lblCodigoSala;
     private JLabel lblCapacidad;
     private JLabel lblNombre;
